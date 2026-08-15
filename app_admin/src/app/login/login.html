@@ -1,0 +1,49 @@
+<div class="container">
+  <h2 class="mb-3">Admin Login</h2>
+
+  @if (errorMessage) {
+    <div class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+  }
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input
+        id="email"
+        type="email"
+        class="form-control"
+        formControlName="email"
+        [class.is-invalid]="submitted && f['email'].errors"
+      >
+
+      <div class="invalid-feedback">
+        Enter a valid email address.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input
+        id="password"
+        type="password"
+        class="form-control"
+        formControlName="password"
+        [class.is-invalid]="submitted && f['password'].errors"
+      >
+
+      <div class="invalid-feedback">
+        Password is required.
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary me-2">
+      Login
+    </button>
+
+    <a routerLink="/" class="btn btn-secondary">
+      Cancel
+    </a>
+  </form>
+</div>

@@ -1,0 +1,354 @@
+<div class="container">
+  <h2 class="mb-3">Edit Trip</h2>
+
+  <!-- Loading message -->
+  <div
+    *ngIf="isLoading"
+    class="alert alert-info"
+    role="status"
+  >
+    Loading trip information...
+  </div>
+
+  <!-- API or loading error message -->
+  <div
+    *ngIf="errorMessage"
+    class="alert alert-danger"
+    role="alert"
+  >
+    {{ errorMessage }}
+  </div>
+
+  <!-- Success message -->
+  <div
+    *ngIf="successMessage"
+    class="alert alert-success"
+    role="status"
+  >
+    {{ successMessage }}
+  </div>
+
+  <form
+    *ngIf="!isLoading"
+    [formGroup]="editForm"
+    (ngSubmit)="onSubmit()"
+    novalidate
+  >
+    <!-- Trip code -->
+    <div class="mb-3">
+      <label for="code" class="form-label">
+        Trip Code
+      </label>
+
+      <input
+        id="code"
+        type="text"
+        class="form-control"
+        formControlName="code"
+        maxlength="20"
+        [class.is-invalid]="
+          (submitted || f['code'].touched) &&
+          f['code'].invalid
+        "
+      >
+
+      <div
+        *ngIf="
+          (submitted || f['code'].touched) &&
+          f['code'].errors
+        "
+        class="invalid-feedback"
+      >
+        <div *ngIf="f['code'].errors?.['required']">
+          Trip code is required.
+        </div>
+
+        <div *ngIf="f['code'].errors?.['minlength']">
+          Trip code must be at least 3 characters.
+        </div>
+
+        <div *ngIf="f['code'].errors?.['maxlength']">
+          Trip code cannot exceed 20 characters.
+        </div>
+
+        <div *ngIf="f['code'].errors?.['pattern']">
+          Use only letters, numbers, and hyphens.
+        </div>
+      </div>
+    </div>
+
+    <!-- Trip name -->
+    <div class="mb-3">
+      <label for="name" class="form-label">
+        Trip Name
+      </label>
+
+      <input
+        id="name"
+        type="text"
+        class="form-control"
+        formControlName="name"
+        maxlength="100"
+        [class.is-invalid]="
+          (submitted || f['name'].touched) &&
+          f['name'].invalid
+        "
+      >
+
+      <div
+        *ngIf="
+          (submitted || f['name'].touched) &&
+          f['name'].errors
+        "
+        class="invalid-feedback"
+      >
+        <div *ngIf="f['name'].errors?.['required']">
+          Trip name is required.
+        </div>
+
+        <div *ngIf="f['name'].errors?.['minlength']">
+          Trip name must be at least 3 characters.
+        </div>
+
+        <div *ngIf="f['name'].errors?.['maxlength']">
+          Trip name cannot exceed 100 characters.
+        </div>
+      </div>
+    </div>
+
+    <!-- Trip length -->
+    <div class="mb-3">
+      <label for="length" class="form-label">
+        Length in Days
+      </label>
+
+      <input
+        id="length"
+        type="number"
+        min="1"
+        step="1"
+        class="form-control"
+        formControlName="length"
+        [class.is-invalid]="
+          (submitted || f['length'].touched) &&
+          f['length'].invalid
+        "
+      >
+
+      <div
+        *ngIf="
+          (submitted || f['length'].touched) &&
+          f['length'].errors
+        "
+        class="invalid-feedback"
+      >
+        <div *ngIf="f['length'].errors?.['required']">
+          Trip length is required.
+        </div>
+
+        <div *ngIf="f['length'].errors?.['pattern']">
+          Trip length must be a whole number greater than zero.
+        </div>
+      </div>
+    </div>
+
+    <!-- Start date -->
+    <div class="mb-3">
+      <label for="start" class="form-label">
+        Start Date
+      </label>
+
+      <input
+        id="start"
+        type="date"
+        class="form-control"
+        formControlName="start"
+        [class.is-invalid]="
+          (submitted || f['start'].touched) &&
+          f['start'].invalid
+        "
+      >
+
+      <div
+        *ngIf="
+          (submitted || f['start'].touched) &&
+          f['start'].errors
+        "
+        class="invalid-feedback"
+      >
+        Start date is required.
+      </div>
+    </div>
+
+    <!-- Resort -->
+    <div class="mb-3">
+      <label for="resort" class="form-label">
+        Resort
+      </label>
+
+      <input
+        id="resort"
+        type="text"
+        class="form-control"
+        formControlName="resort"
+        maxlength="100"
+        [class.is-invalid]="
+          (submitted || f['resort'].touched) &&
+          f['resort'].invalid
+        "
+      >
+
+      <div
+        *ngIf="
+          (submitted || f['resort'].touched) &&
+          f['resort'].errors
+        "
+        class="invalid-feedback"
+      >
+        <div *ngIf="f['resort'].errors?.['required']">
+          Resort is required.
+        </div>
+
+        <div *ngIf="f['resort'].errors?.['minlength']">
+          Resort name must be at least 2 characters.
+        </div>
+
+        <div *ngIf="f['resort'].errors?.['maxlength']">
+          Resort name cannot exceed 100 characters.
+        </div>
+      </div>
+    </div>
+
+    <!-- Price per person -->
+    <div class="mb-3">
+      <label for="perPerson" class="form-label">
+        Price Per Person
+      </label>
+
+      <input
+        id="perPerson"
+        type="number"
+        min="0.01"
+        step="0.01"
+        class="form-control"
+        formControlName="perPerson"
+        [class.is-invalid]="
+          (submitted || f['perPerson'].touched) &&
+          f['perPerson'].invalid
+        "
+      >
+
+      <div
+        *ngIf="
+          (submitted || f['perPerson'].touched) &&
+          f['perPerson'].errors
+        "
+        class="invalid-feedback"
+      >
+        <div *ngIf="f['perPerson'].errors?.['required']">
+          Price per person is required.
+        </div>
+
+        <div *ngIf="f['perPerson'].errors?.['pattern']">
+          Enter a positive price with no more than two decimal places.
+        </div>
+      </div>
+    </div>
+
+    <!-- Image filename -->
+    <div class="mb-3">
+      <label for="image" class="form-label">
+        Image Filename
+      </label>
+
+      <input
+        id="image"
+        type="text"
+        class="form-control"
+        formControlName="image"
+        maxlength="255"
+        [class.is-invalid]="
+          (submitted || f['image'].touched) &&
+          f['image'].invalid
+        "
+      >
+
+      <div
+        *ngIf="
+          (submitted || f['image'].touched) &&
+          f['image'].errors
+        "
+        class="invalid-feedback"
+      >
+        <div *ngIf="f['image'].errors?.['required']">
+          Image filename is required.
+        </div>
+
+        <div *ngIf="f['image'].errors?.['maxlength']">
+          Image filename cannot exceed 255 characters.
+        </div>
+      </div>
+    </div>
+
+    <!-- Description -->
+    <div class="mb-3">
+      <label for="description" class="form-label">
+        Description
+      </label>
+
+      <textarea
+        id="description"
+        rows="4"
+        class="form-control"
+        formControlName="description"
+        maxlength="1000"
+        [class.is-invalid]="
+          (submitted || f['description'].touched) &&
+          f['description'].invalid
+        "
+      ></textarea>
+
+      <div
+        *ngIf="
+          (submitted || f['description'].touched) &&
+          f['description'].errors
+        "
+        class="invalid-feedback"
+      >
+        <div *ngIf="f['description'].errors?.['required']">
+          Description is required.
+        </div>
+
+        <div *ngIf="f['description'].errors?.['minlength']">
+          Description must be at least 20 characters.
+        </div>
+
+        <div *ngIf="f['description'].errors?.['maxlength']">
+          Description cannot exceed 1,000 characters.
+        </div>
+      </div>
+
+      <div class="form-text">
+        {{ f['description'].value?.length || 0 }} / 1000 characters
+      </div>
+    </div>
+
+    <!-- Action buttons -->
+    <button
+      type="submit"
+      class="btn btn-primary me-2"
+      [disabled]="editForm.invalid || isSubmitting"
+    >
+      {{ isSubmitting ? 'Saving...' : 'Save Changes' }}
+    </button>
+
+    <a
+      routerLink="/"
+      class="btn btn-secondary"
+      [class.disabled]="isSubmitting"
+      [attr.aria-disabled]="isSubmitting"
+    >
+      Cancel
+    </a>
+  </form>
+</div>
