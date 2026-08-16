@@ -39,6 +39,23 @@ Each enhancement folder contains the files associated with the enhanced artifact
 
 The original artifacts were completed during earlier courses in the Computer Science program. Links to the original versions, enhanced versions, enhancement narratives, and code review are provided through my CS 499 ePortfolio.
 
+## Running the Artifacts
+
+### Software Engineering and Design / Databases
+The Travlr Getaways application requires Node.js, npm, and MongoDB.
+
+1. Clone this repository.
+2. Navigate to the appropriate artifact folder.
+3. Run `npm install` to install the required dependencies.
+4. Ensure MongoDB is running and configured for the application.
+5. Run the application using the start command defined in `package.json`.
+6. For the Angular administrative interface, navigate to the Angular project folder, install dependencies, and start the development server.
+
+### Algorithms and Data Structures
+Navigate to the Algorithms and Data Structures artifact folder and follow the included source files and project configuration to compile and run the application.
+
+Specific dependencies and configuration files are included with each artifact where applicable.
+
 ## ePortfolio
 
 My complete CS 499 ePortfolio presents my professional self-assessment, code review, original and enhanced artifacts, and enhancement narratives.
