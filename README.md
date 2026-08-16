@@ -51,6 +51,7 @@ The Travlr Getaways application requires Node.js, npm, and MongoDB.
 5. Run the application using the start command defined in `package.json`.
 6. For the Angular administrative interface, navigate to the Angular project folder, install dependencies, and start the development server.
 
+
 ### Algorithms and Data Structures
 Navigate to the Algorithms and Data Structures artifact folder and follow the included source files and project configuration to compile and run the application.
 
